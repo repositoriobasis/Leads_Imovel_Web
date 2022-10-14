@@ -1,22 +1,24 @@
 package br.com.basissistemas.leads.imovelweb.api.dto;
 
+import java.sql.Timestamp;
+
 import lombok.Builder;
 import lombok.Data;
 
 @Builder
 @Data
-public class Imovelweb {
+public class Mensagem {
 
-	private Integer idAvisoNavplat;
+	private Long idAvisoNavplat;
 	private String codigoAviso;  
-	private Integer idMensaje;
-	private String fecha; // yyyy-MM-dd'T'HH:mm:ss.SSSZ
+	private Long idMensaje;
+	private Timestamp fecha; // yyyy-MM-dd'T'HH:mm:ss.SSSZ
 	private String nombre;
 	private String email;
 	private String telefono;
 	private String textoMensaje;
-	private Integer idContacto;
-	private Integer idContactoAccion;
-	private Integer id; 
+	private Long idContacto;
+	private Long idContactoAccion;
+	private Long id; 
 	
 }

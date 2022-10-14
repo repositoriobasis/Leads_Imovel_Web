@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.basissistemas.leads.imovelweb.tasks.TaskImobiliaria;
 import br.com.basissistemas.leads.imovelweb.tasks.TaskMensagem;
 
 @Configuration
@@ -23,17 +22,13 @@ public class BatchConfig {
 	@Autowired
 	private JobBuilderFactory jobs;
 	
-	@Bean
-	public Step stepImobiliaria(){
-		return steps.get("stepImobiliaria")
-				.tasklet(new TaskImobiliaria())
-				.build();
-	}
+	@Autowired
+	TaskMensagem taskMensagem;
 	
 	@Bean
 	public Step stepMensagem(){
 		return steps.get("stepMensagem")
-				.tasklet(new TaskMensagem())
+				.tasklet(taskMensagem)
 				.build();
 	}
 	
@@ -41,8 +36,7 @@ public class BatchConfig {
 	public Job mensagemJob(){
 		return jobs.get("mensagemJob")
 				.incrementer(new RunIdIncrementer())
-				.start(stepImobiliaria())
-				.next(stepMensagem())
+				.start(stepMensagem())
 				.build();
 	}
 

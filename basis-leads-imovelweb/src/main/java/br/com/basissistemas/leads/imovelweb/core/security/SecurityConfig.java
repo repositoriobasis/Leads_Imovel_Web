@@ -7,9 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import br.com.basissistemas.leads.imovelweb.filter.TenantFilter;
 
 @EnableWebSecurity
 @Configuration
@@ -20,11 +17,9 @@ public class SecurityConfig {
 		http
 		.csrf().disable()
 	    .authorizeRequests()
-        .antMatchers("/actuator/**").permitAll()
-        .anyRequest().authenticated()
+	    .anyRequest().permitAll()
         .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and().addFilterBefore(new TenantFilter(), UsernamePasswordAuthenticationFilter.class)
-        .httpBasic(Customizer.withDefaults());
+        .and().httpBasic(Customizer.withDefaults());
 		return http.build();
 	}
 
