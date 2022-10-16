@@ -11,9 +11,12 @@ public class ImovelwebClient {
 	@Value("${imovelweb.api.host}")
 	private String hostApi;
 	
+	@Value("${imovelweb.api.token}")
+	private String tokenApi;
+	
 	@Bean("iwClient")
 	public WebClient webClientImovelweb(WebClient.Builder builder) {
-		String bearerToken = "Bearer c25d61d2-de70-44b7-b111-2a25c94c75fd";
+		String bearerToken = "Bearer " + tokenApi;
 		
 		return builder
 				.baseUrl(hostApi)
